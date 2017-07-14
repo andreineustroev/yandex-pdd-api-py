@@ -34,9 +34,13 @@ def importMailbox(extLogin, extPasswd):
 	print(json.dumps(result, sort_keys=True, indent=4, separators=(',',': ')))
 
 def importStatus():
-	add_domain = { 'domain' : domain }
-	headers.update(add_domain)
 	r = requests.get("https://pddimp.yandex.ru/api2/admin/import/check_imports?domain={domain}".format(domain=domain), 
+																								headers=headers)
+	result = json.loads(r.content.decode('utf8'))
+	print(json.dumps(result, sort_keys=True, indent=4, separators=(',',': ')))
+
+def importAbort():
+	r = requests.get("/api2/admin/import/stop_all_imports?domain={domain}".format(domain=domain), 
 																								headers=headers)
 	result = json.loads(r.content.decode('utf8'))
 	print(json.dumps(result, sort_keys=True, indent=4, separators=(',',': ')))

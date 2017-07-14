@@ -19,7 +19,8 @@ except IndexError as e:
 		"Импорт ящиков:\n"
 		"checkconnect - проверка возможности импорта\n"
 		"importmailbox - импорт одного ящика\n"
-		"importstatus - статус импорта\n")
+		"importstatus - статус импорта\n"
+		"importcancel - отменить импорт\n")
 	action = "none"
 else:
 	action = sys.argv[1]
@@ -98,3 +99,6 @@ if action == "importmailbox":
 
 if action == "importstatus":
 	import_mailbox.importStatus()
+
+if action == "importcancel":
+	import_mailbox.importAbort()
