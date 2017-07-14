@@ -2,7 +2,7 @@
 
 import sys
 import get
-
+import import_mailbox
 
 try:
 	sys.argv[1]
@@ -14,7 +14,12 @@ except IndexError as e:
 		"modifypass - изменить пароль\n"
 		"modifyname - изменить имя\n"
 		"modifysex - изменить пол\n"
-		"modifyen - включить/выключить акаунт\n")
+		"modifyen - включить/выключить акаунт\n"
+		"\n"
+		"Импорт ящиков:\n"
+		"checkconnect - проверка возможности импорта\n"
+		"importmailbox - импорт одного ящика\n"
+		"importstatus - статус импорта\n")
 	action = "none"
 else:
 	action = sys.argv[1]
@@ -78,3 +83,18 @@ if action == "modifyen":
 			"api.py modifypass login [yes/no]")
 	else:
 		get.modifyUser(login=sys.argv[2], enabled=sys.argv[3])
+
+if action == "checkconnect":
+	import_mailbox.checkConnect()
+
+if action == "importmailbox":
+	try:
+		sys.argv[3]
+	except Exception as e:
+		print("Не хватает аргументов, синтаксис \n"
+			"api.py login password")
+	else:
+		import_mailbox.importMailbox(extLogin=sys.argv[2], extPasswd=sys.argv[3])
+
+if action == "importstatus":
+	import_mailbox.importStatus()
