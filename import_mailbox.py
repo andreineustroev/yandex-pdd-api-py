@@ -40,7 +40,7 @@ def importStatus():
 	print(json.dumps(result, sort_keys=True, indent=4, separators=(',',': ')))
 
 def importAbort():
-	r = requests.get("/api2/admin/import/stop_all_imports?domain={domain}".format(domain=domain), 
+	r = requests.post("https://pddimp.yandex.ru/api2/admin/import/stop_all_imports?domain={domain}".format(domain=domain), 
 																								headers=headers)
 	result = json.loads(r.content.decode('utf8'))
 	print(json.dumps(result, sort_keys=True, indent=4, separators=(',',': ')))
